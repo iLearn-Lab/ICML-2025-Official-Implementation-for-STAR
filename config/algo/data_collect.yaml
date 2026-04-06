@@ -1,0 +1,3 @@
+# Minimal placeholders needed by the MetaWorld data collection config.
+frame_stack: 1
+skill_block_size: 1

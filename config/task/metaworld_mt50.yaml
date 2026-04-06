@@ -1,0 +1,8 @@
+defaults:
+  - metaworld_base
+  - _self_
+
+benchmark_name: MT50
+mode: train
+n_tasks: 50
+demos_per_env: 100

@@ -1,0 +1,7 @@
+defaults:
+  - libero_base
+  - _self_
+
+benchmark_name: libero_spatial
+mode: all
+n_tasks: 10

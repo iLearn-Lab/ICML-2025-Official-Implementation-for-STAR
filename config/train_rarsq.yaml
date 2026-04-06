@@ -1,0 +1,15 @@
+defaults:
+  - train_base
+  - _self_
+
+train_dataloader:
+  batch_size: 1024
+
+training:
+  n_epochs: 100
+  use_amp: false
+  load_obs: ${algo.dataset.load_obs_for_pretrain}
+
+stage: 0
+
+logging_folder: rarsq

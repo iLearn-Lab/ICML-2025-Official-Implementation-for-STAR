@@ -1,0 +1,22 @@
+defaults:
+  - train_base
+  - _self_
+
+stage: 1
+
+logging_folder: cst
+
+train_dataloader:
+  batch_size: 512
+
+training:
+  n_epochs: 500
+
+algo:
+  lr: 8e-4
+
+rollout:
+  enabled: false
+  interval: 25
+  rollouts_per_env: 5
+  num_parallel_envs: 5

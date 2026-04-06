@@ -1,0 +1,83 @@
+# Ignore compiled files
+*.class
+*.o
+*.pyc
+
+# Ignore build output
+build/
+dist/
+
+*~
+.hydra
+*pyc
+*.egg-info/
+datasets
+datasets_scripted
+*videos
+*.mp4
+results
+plots
+outputs/*
+/MUJOCO_LOG.TXT
+wandb
+experiments/
+experiments_clip/*
+evaluations_clip/*
+experiments_finetune/*
+eval_outs
+pace_models/*
+*.zip
+*.out
+*.hdf5
+*.pth
+experiments_saved/
+ppo_experiments/
+slurm/
+# Ignore IDE and editor files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore dependencies
+node_modules/
+vendor/
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore sensitive information
+config.ini
+secrets.json
+
+# Ignore generated documentation
+docs/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+.codex
+
+data/
+experiments/
+zplots
+
+# 仿真环境
+third_parties/
+
+# 输出目录
+ture_rotation_outputs/
+new_outputs/
+outputs/
+
+# VIT模型
+base_model/
+
+scripts/eval.sh
+config/evaluate.yaml
+quest/utils/libero_utils.py
+
+*data.json
+
+third_parties/

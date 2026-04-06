@@ -1,0 +1,69 @@
+defaults:
+  - base
+  - _self_
+
+policy:
+  _target_: star.algos.star.STAR
+  skill_quantizer:
+    _target_: star.algos.star_modules.rarsq.RaRSQ
+    input_dim_h: ${algo.skill_block_size}
+    input_dim_w: ${task.shape_meta.action_dim}
+    n_latent_dims: 512
+    codebook_size: 16
+    quantization_depth: 2
+    hidden_dim: 128
+    num_layers: 1
+    device: ${device}
+    use_rotation_augmentation: true
+    use_transformer_decoder: false
+    use_causal_decoder: true
+  causal_skill_transformer:
+    _target_: star.algos.star_modules.cst.CausalSkillTransformer
+    start_token: ${algo.policy.skill_quantizer.codebook_size}
+    vocab_size: ${algo.policy.skill_quantizer.codebook_size}
+    block_size: ${algo.policy.skill_quantizer.quantization_depth}
+    n_layer: 6
+    n_head: 6
+    n_embd: ${algo.embed_dim}
+    attn_pdrop: 0.1
+    embd_pdrop: 0.1
+    beam_size: 5
+    temperature: 1.0
+  stage: ${stage}
+  loss_fn:
+    _target_: star.algos.star.FocalLoss
+    gamma: 2.0
+  action_refinement_loss_weight: ${algo.action_refinement_loss_weight}
+  first_code_loss_weight: ${algo.first_code_loss_weight}
+  second_code_loss_weight: ${algo.second_code_loss_weight}
+  frame_stack: ${algo.frame_stack}
+  skill_block_size: ${algo.skill_block_size}
+  action_horizon: ${algo.action_horizon}
+  obs_reduction: cat
+  device: ${device}
+  use_cross_entropy_loss: false
+
+name: star
+
+lr: 5.5e-5
+weight_decay: 1e-6
+
+embed_dim: 384
+lowdim_embed_dim: 128
+image_embed_dim: 256
+action_refinement_loss_weight: 20
+first_code_loss_weight: 2.0
+second_code_loss_weight: 1.0
+
+frame_stack: 10
+skill_block_size: 8
+
+action_horizon: 2
+
+dataset:
+  seq_len: ${eval:'${algo.frame_stack} + ${algo.skill_block_size} - 1'}
+  frame_stack: 1
+  lowdim_obs_seq_len: null
+  obs_seq_len: ${algo.frame_stack}
+  load_obs_for_pretrain: false
+  load_next_obs: false
